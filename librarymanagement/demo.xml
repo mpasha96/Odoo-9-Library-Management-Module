@@ -1,0 +1,19 @@
+<openerp>
+    <data>
+        <record model="librarymanagement.books" id="book0">
+            <field name="name">Book 0</field>
+            <field name="description">Book 0's description
+
+            Can have multiple lines
+            </field>
+        </record>
+        <record model="librarymanagement.books" id="book1">
+            <field name="name">Book 1</field>
+            no description for this one
+        </record>
+        <record model="librarymanagement.books" id="book2">
+            <field name="name">Book 2</field>
+            <field name="description">Book 2's description</field>
+        </record>
+    </data>
+</openerp>

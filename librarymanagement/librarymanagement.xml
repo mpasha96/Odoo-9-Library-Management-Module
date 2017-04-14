@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="books_form_view">
+            <field name="name">books.form</field>
+            <field name="model">librarymanagement.books</field>
+            <field name="arch" type="xml">
+                <form string="Books Form">
+                    <sheet>
+                        <group>
+                            <field name="title"/>
+                            <field name="author"/>
+                            <field name="publisher"/>
+                            <field name="title"/>
+                            <field name="unit_price"/>
+                            <field name="quantity"/>
+                            <field name="price"/>
+                            <field name="edition"/>
+                            <field name="librarian_id"/>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <field name="description"/>
+                            </page>
+                            <page string="Issued Books">
+                                <field name="issuedbooks_ids">
+                                    <tree string="Issued Books">
+                                        <field name="title"/>
+                                        <field name="asstlibrarian_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="books_search_view">
+            <field name="name">books.search</field>
+            <field name="model">librarymanagement.books</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="title"/>
+                    <field name="author"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- override the automatically generated list view for books -->
+        <record model="ir.ui.view" id="books_tree_view">
+            <field name="name">books.tree</field>
+            <field name="model">librarymanagement.books</field>
+            <field name="arch" type="xml">
+                <tree string="Books Tree">
+                    <field name="title"/>
+                    <field name="author"/>
+                    <field name="publisher"/>
+                    <field name="price"/>
+                    <field name="edition"/>
+                    <field name="librarian_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- window action -->
+        <!--
+            The following tag is an action definition for a "window action",
+            that is an action opening a view or a set of views
+        -->
+        <record model="ir.actions.act_window" id="books_list_action">
+            <field name="name">Books</field>
+            <field name="res_model">librarymanagement.books</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Add the first Book
+                </p>
+            </field>
+        </record>
+
+        <!-- top level menu: no parent -->
+        <menuitem id="main_librarymanagement_menu" name="Library Management"/>
+        <!-- A first level in the left side menu is needed
+             before using action= attribute -->
+        <menuitem id="librarymanagement_menu" name="Library Management"
+                  parent="main_librarymanagement_menu"/>
+        <!-- the following menuitem should appear *after*
+             its parent librarymanagement_menu and *after* its
+             action books_list_action -->
+        <menuitem id="Books_menu" name="Books" parent="librarymanagement_menu"
+                  action="books_list_action"/>
+        <!-- Full id location:
+             action="librarymanagement.books_list_action"
+             It is not required when it is the same module -->
+
+                <!-- issuedbooks form view -->
+        <record model="ir.ui.view" id="issuedbooks_form_view">
+            <field name="name">issuedbooks.form</field>
+            <field name="model">librarymanagement.issuedbooks</field>
+            <field name="arch" type="xml">
+                <form string="Issued Books Form">
+                    <header>
+                        <button name="action_available" type="object"
+                                string="Reset to Available"
+                                states="Issued,returned"/>
+                        <button name="action_issued" type="object"
+                                string="Issued" states="availale"
+                                class="oe_highlight"/>
+                        <button name="action_returned" type="object"
+                                string="Mark as Returned" states="issued"
+                                class="oe_highlight"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group string='General'>
+                            <field name="book_id"/>
+                            <field name="title"/>
+                            <field name="author"/>
+                            <field name="studentname"/>
+                            <field name="studentid"/>
+                            <field name="asstlibrarian_id"/>
+                        </group>
+                        <group string='Schedule'>
+                            <field name="issuedate"/>
+                            <field name="returndate"/>
+                            <field name="bookstatus"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- issuedbooks tree/list view -->
+        <record model="ir.ui.view" id="issuedbooks_tree_view">
+            <field name="name">issuedbooks.tree</field>
+            <field name="model">librarymanagement.issuedbooks</field>
+            <field name="arch" type="xml">
+                <tree string="Issued Books Tree">
+                    <field name="title"/>
+                    <field name="author"/>
+                    <field name="studentname"/>
+                    <field name="studentid"/>
+                    <!-- <field name="statusbar"/> -->
+                </tree>
+            </field>
+        </record>
+
+
+
+        <record model="ir.actions.act_window" id="issuedbooks_list_action">
+            <field name="name">Issued Books</field>
+            <field name="res_model">librarymanagement.issuedbooks</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="issuedbooks_menu" name="Issued Books"
+                  parent="librarymanagement_menu"
+                  action="issuedbooks_list_action"/>
+    </data>
+</openerp>

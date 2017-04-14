@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+books_manager,books manager,model_librarymanagement_books,group_manager,1,1,1,1
+issuedbooks_manager,issuedbooks manager,model_librarymanagement_issuedbooks,group_manager,1,1,1,1
+books_read_all,books all,model_librarymanagement_books,,1,0,0,0
+issuedbooks_read_all,issuedbooks all,model_librarymanagement_issuedbooks,,1,0,0,0

@@ -1,0 +1,7 @@
+<openerp>
+    <data>
+        <record id="group_manager" model="res.groups">
+            <field name="name">LibraryManagement / Manager</field>
+        </record>
+    </data>
+</openerp>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <openerp>
+    <data>
+        <!-- Add instructor field to existing view -->
+        <record model="ir.ui.view" id="xpatheg_books_form_view">
+            <field name="name">xpath.books</field>
+            <field name="model">librarymanagement.books</field>
+            <field name="inherit_id" ref="librarymanagement.books_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='price']" position="before">
+                    <field name="asstlibrarian"/>
+                    <field name="standardprice"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="xpathexample_action">
+            <field name="name">xpathexample</field>
+            <field name="res_model">librarymanagement.books</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="configuration_menu" name="Configuration"
+                  parent="main_librarymanagement_menu"/>
+        <menuitem id="xpathexample_menu" name="xpathexample"
+                  parent="configuration_menu"
+                  action="xpathexample_action"/>
+    </data>
+</openerp>
